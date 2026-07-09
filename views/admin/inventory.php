@@ -19,11 +19,11 @@
     </div>
     <div class="stat-card">
       <div class="stat-label">Low Stock</div>
-      <div class="stat-value text-yellow-600 dark:text-yellow-400"><?= $lowStockCount ?></div>
+      <div class="stat-value" style="color:var(--warning)"><?= $lowStockCount ?></div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Out of Stock</div>
-      <div class="stat-value text-red-600 dark:text-red-400"><?= $outOfStockCount ?></div>
+      <div class="stat-value" style="color:var(--error)"><?= $outOfStockCount ?></div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Movements</div>
@@ -32,12 +32,12 @@
   </div>
 
   <!-- Tabs -->
-  <div class="flex gap-1 border-b border-gray-200 dark:border-gray-700 mb-6">
-    <a href="?tab=all" class="px-5 py-3 text-sm font-medium rounded-t-lg transition -mb-px border-b-2 <?= $tab === 'all' ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400' : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300' ?>">Inventario</a>
-    <a href="?tab=entries" class="px-5 py-3 text-sm font-medium rounded-t-lg transition -mb-px border-b-2 <?= $tab === 'entries' ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400' : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300' ?>">Entradas</a>
-    <a href="?tab=exits" class="px-5 py-3 text-sm font-medium rounded-t-lg transition -mb-px border-b-2 <?= $tab === 'exits' ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400' : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300' ?>">Salidas</a>
-    <a href="?tab=alerts" class="px-5 py-3 text-sm font-medium rounded-t-lg transition -mb-px border-b-2 <?= $tab === 'alerts' ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400' : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300' ?>">Alertas</a>
-    <a href="?tab=movements" class="px-5 py-3 text-sm font-medium rounded-t-lg transition -mb-px border-b-2 <?= $tab === 'movements' ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400' : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300' ?>">Movimientos</a>
+  <div class="flex gap-1 border-b border-color mb-6">
+    <a href="?tab=all" class="px-5 py-3 text-sm font-medium rounded-t-lg transition -mb-px border-b-2 <?= $tab === 'all' ? 'border-primary text-primary' : 'border-transparent text-muted hover:text-body' ?>">Inventario</a>
+    <a href="?tab=entries" class="px-5 py-3 text-sm font-medium rounded-t-lg transition -mb-px border-b-2 <?= $tab === 'entries' ? 'border-primary text-primary' : 'border-transparent text-muted hover:text-body' ?>">Entradas</a>
+    <a href="?tab=exits" class="px-5 py-3 text-sm font-medium rounded-t-lg transition -mb-px border-b-2 <?= $tab === 'exits' ? 'border-primary text-primary' : 'border-transparent text-muted hover:text-body' ?>">Salidas</a>
+    <a href="?tab=alerts" class="px-5 py-3 text-sm font-medium rounded-t-lg transition -mb-px border-b-2 <?= $tab === 'alerts' ? 'border-primary text-primary' : 'border-transparent text-muted hover:text-body' ?>">Alertas</a>
+    <a href="?tab=movements" class="px-5 py-3 text-sm font-medium rounded-t-lg transition -mb-px border-b-2 <?= $tab === 'movements' ? 'border-primary text-primary' : 'border-transparent text-muted hover:text-body' ?>">Movimientos</a>
   </div>
 
   <?php if ($tab === 'all'): ?>
@@ -89,21 +89,21 @@
               <td class="font-semibold"><?= $p['stock'] ?></td>
               <td>
                 <?php if ($status === 'ok'): ?>
-                  <span class="badge" style="background:#d1fae5;color:#065f46">OK</span>
+                  <span class="badge" style="background:color-mix(in srgb, var(--success) 15%, white);color:var(--success)">OK</span>
                 <?php elseif ($status === 'low'): ?>
-                  <span class="badge" style="background:#fef3c7;color:#92400e">Low</span>
+                  <span class="badge" style="background:color-mix(in srgb, var(--warning) 15%, white);color:var(--warning)">Low</span>
                 <?php else: ?>
-                  <span class="badge" style="background:#fee2e2;color:#991b1b">Out of Stock</span>
+                  <span class="badge" style="background:color-mix(in srgb, var(--error) 15%, white);color:var(--error)">Out of Stock</span>
                 <?php endif; ?>
               </td>
-              <td class="text-sm text-gray-500"><?= $p['last_movement'] ? date('M j, Y H:i', strtotime($p['last_movement'])) : '-' ?></td>
+              <td class="text-sm text-muted"><?= $p['last_movement'] ? date('M j, Y H:i', strtotime($p['last_movement'])) : '-' ?></td>
               <td>
                 <a href="/admin/products/edit/<?= $p['id'] ?>" class="btn btn-sm btn-outline">Edit</a>
               </td>
             </tr>
           <?php endforeach; ?>
           <?php if (empty($products)): ?>
-            <tr><td colspan="6" class="text-center py-8 text-gray-500">No products found.</td></tr>
+            <tr><td colspan="6" class="text-center py-8 text-muted">No products found.</td></tr>
           <?php endif; ?>
         </tbody>
       </table>
@@ -163,16 +163,16 @@
           ?>
           <?php foreach ($entries as $e): ?>
             <tr>
-              <td class="text-sm text-gray-500"><?= date('M j, Y H:i', strtotime($e['created_at'])) ?></td>
+              <td class="text-sm text-muted"><?= date('M j, Y H:i', strtotime($e['created_at'])) ?></td>
               <td class="font-medium"><?= escape($e['pname']) ?></td>
-              <td class="font-semibold text-green-600">+<?= $e['quantity'] ?></td>
+              <td style="color:var(--success)" class="font-semibold">+<?= $e['quantity'] ?></td>
               <td><?= $e['stock_before'] ?></td>
               <td><?= $e['stock_after'] ?></td>
-              <td class="text-sm text-gray-500"><?= escape($e['reason'] ?: '-') ?></td>
+              <td class="text-sm text-muted"><?= escape($e['reason'] ?: '-') ?></td>
             </tr>
           <?php endforeach; ?>
           <?php if (empty($entries)): ?>
-            <tr><td colspan="6" class="text-center py-8 text-gray-500">No entries yet.</td></tr>
+            <tr><td colspan="6" class="text-center py-8 text-muted">No entries yet.</td></tr>
           <?php endif; ?>
         </tbody>
       </table>
@@ -232,16 +232,16 @@
           ?>
           <?php foreach ($exits as $e): ?>
             <tr>
-              <td class="text-sm text-gray-500"><?= date('M j, Y H:i', strtotime($e['created_at'])) ?></td>
+              <td class="text-sm text-muted"><?= date('M j, Y H:i', strtotime($e['created_at'])) ?></td>
               <td class="font-medium"><?= escape($e['pname']) ?></td>
-              <td class="font-semibold text-red-600">-<?= $e['quantity'] ?></td>
+              <td style="color:var(--error)" class="font-semibold">-<?= $e['quantity'] ?></td>
               <td><?= $e['stock_before'] ?></td>
               <td><?= $e['stock_after'] ?></td>
-              <td class="text-sm text-gray-500"><?= escape($e['reason'] ?: '-') ?></td>
+              <td class="text-sm text-muted"><?= escape($e['reason'] ?: '-') ?></td>
             </tr>
           <?php endforeach; ?>
           <?php if (empty($exits)): ?>
-            <tr><td colspan="6" class="text-center py-8 text-gray-500">No exits yet.</td></tr>
+            <tr><td colspan="6" class="text-center py-8 text-muted">No exits yet.</td></tr>
           <?php endif; ?>
         </tbody>
       </table>
@@ -285,19 +285,19 @@
               <td class="font-bold text-lg"><?= $p['stock'] ?></td>
               <td>
                 <?php if ($status === 'low'): ?>
-                  <span class="badge" style="background:#fef3c7;color:#92400e">Low Stock</span>
+                  <span class="badge" style="background:color-mix(in srgb, var(--warning) 15%, white);color:var(--warning)">Low Stock</span>
                 <?php else: ?>
-                  <span class="badge" style="background:#fee2e2;color:#991b1b">Out of Stock</span>
+                  <span class="badge" style="background:color-mix(in srgb, var(--error) 15%, white);color:var(--error)">Out of Stock</span>
                 <?php endif; ?>
               </td>
-              <td class="text-sm text-gray-500"><?= $p['last_movement'] ? date('M j, Y H:i', strtotime($p['last_movement'])) : '-' ?></td>
+              <td class="text-sm text-muted"><?= $p['last_movement'] ? date('M j, Y H:i', strtotime($p['last_movement'])) : '-' ?></td>
               <td>
                 <a href="/admin/inventory?tab=entries" class="btn btn-sm btn-primary">Add Stock</a>
               </td>
             </tr>
           <?php endforeach; ?>
           <?php if (empty($alertProducts)): ?>
-            <tr><td colspan="6" class="text-center py-8 text-gray-500">All products are well-stocked!</td></tr>
+            <tr><td colspan="6" class="text-center py-8 text-muted">All products are well-stocked!</td></tr>
           <?php endif; ?>
         </tbody>
       </table>
@@ -343,25 +343,25 @@
         <tbody>
           <?php foreach ($movements as $m): ?>
             <tr>
-              <td class="text-sm text-gray-500"><?= date('M j, Y H:i', strtotime($m['created_at'])) ?></td>
+              <td class="text-sm text-muted"><?= date('M j, Y H:i', strtotime($m['created_at'])) ?></td>
               <td>
                 <?php if ($m['type'] === 'entry'): ?>
-                  <span class="badge" style="background:#d1fae5;color:#065f46">Entry</span>
+                  <span class="badge" style="background:color-mix(in srgb, var(--success) 15%, white);color:var(--success)">Entry</span>
                 <?php elseif ($m['type'] === 'exit'): ?>
-                  <span class="badge" style="background:#fee2e2;color:#991b1b">Exit</span>
+                  <span class="badge" style="background:color-mix(in srgb, var(--error) 15%, white);color:var(--error)">Exit</span>
                 <?php else: ?>
-                  <span class="badge" style="background:#dbeafe;color:#1e40af">Adjustment</span>
+                  <span class="badge" style="background:color-mix(in srgb, var(--primary) 15%, white);color:var(--primary)">Adjustment</span>
                 <?php endif; ?>
               </td>
               <td class="font-medium"><?= escape($m['pname']) ?></td>
               <td class="font-semibold"><?= $m['quantity'] ?></td>
               <td><?= $m['stock_before'] ?></td>
               <td><?= $m['stock_after'] ?></td>
-              <td class="text-sm text-gray-500"><?= escape($m['reason'] ?: '-') ?></td>
+              <td class="text-sm text-muted"><?= escape($m['reason'] ?: '-') ?></td>
             </tr>
           <?php endforeach; ?>
           <?php if (empty($movements)): ?>
-            <tr><td colspan="7" class="text-center py-8 text-gray-500">No movements yet.</td></tr>
+            <tr><td colspan="7" class="text-center py-8 text-muted">No movements yet.</td></tr>
           <?php endif; ?>
         </tbody>
       </table>

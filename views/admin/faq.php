@@ -1,6 +1,6 @@
-<div style="display:flex;gap:.5rem;margin-bottom:1.5rem;border-bottom:2px solid #e2e8f0;padding-bottom:0">
-  <a href="/admin/faq" style="padding:.625rem 1.25rem;font-size:.875rem;font-weight:500;text-decoration:none;color:<?= $tab === 'list' ? 'var(--primary)' : '#64748b' ?>;border-bottom:2px solid <?= $tab === 'list' ? 'var(--primary)' : 'transparent' ?>;margin-bottom:-2px">All FAQs</a>
-  <a href="/admin/faq/create" style="padding:.625rem 1.25rem;font-size:.875rem;font-weight:500;text-decoration:none;color:<?= $tab === 'edit' ? 'var(--primary)' : '#64748b' ?>;border-bottom:2px solid <?= $tab === 'edit' ? 'var(--primary)' : 'transparent' ?>;margin-bottom:-2px"><?= $editItem ? 'Edit FAQ' : 'New FAQ' ?></a>
+<div style="display:flex;gap:.5rem;margin-bottom:1.5rem;border-bottom:2px solid var(--border-color);padding-bottom:0">
+  <a href="/admin/faq" style="padding:.625rem 1.25rem;font-size:.875rem;font-weight:500;text-decoration:none;color:<?= $tab === 'list' ? 'var(--primary)' : 'var(--text-muted)' ?>;border-bottom:2px solid <?= $tab === 'list' ? 'var(--primary)' : 'transparent' ?>;margin-bottom:-2px">All FAQs</a>
+  <a href="/admin/faq/create" style="padding:.625rem 1.25rem;font-size:.875rem;font-weight:500;text-decoration:none;color:<?= $tab === 'edit' ? 'var(--primary)' : 'var(--text-muted)' ?>;border-bottom:2px solid <?= $tab === 'edit' ? 'var(--primary)' : 'transparent' ?>;margin-bottom:-2px"><?= $editItem ? 'Edit FAQ' : 'New FAQ' ?></a>
 </div>
 
 <?php if ($tab === 'list'): ?>
@@ -17,7 +17,7 @@
     </thead>
     <tbody>
       <?php if (empty($items)): ?>
-        <tr><td colspan="5" style="text-align:center;padding:2rem;color:#94a3b8">No FAQs yet.</td></tr>
+        <tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--text-muted)">No FAQs yet.</td></tr>
       <?php else: ?>
         <?php foreach ($items as $item): ?>
           <tr>

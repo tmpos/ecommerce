@@ -7,12 +7,12 @@
         <div class="flex flex-col gap-2 overflow-y-auto" style="max-height:480px">
           <?php foreach ($images as $i => $img): ?>
             <img src="/<?= $img ?>"
-              class="gallery-thumb w-16 h-16 object-cover rounded-lg border-2 cursor-pointer transition-all duration-150 flex-shrink-0 <?= $i === 0 ? 'border-primary shadow-sm' : 'border-gray-200 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500' ?>"
+              class="gallery-thumb w-16 h-16 object-cover rounded-lg border-2 cursor-pointer transition-all duration-150 flex-shrink-0 <?= $i === 0 ? 'border-primary shadow-sm' : 'border-color hover:border-input' ?>"
               onclick="setMainImage(this, '/<?= $img ?>', <?= $i ?>)">
           <?php endforeach; ?>
         </div>
       <?php endif; ?>
-      <div class="flex-1 relative overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800" id="imageZoomContainer" style="cursor:crosshair">
+      <div class="flex-1 relative overflow-hidden rounded-xl bg-input" id="imageZoomContainer" style="cursor:crosshair">
         <?php if (!empty($images[0])): ?>
           <img src="/<?= $images[0] ?>"
             id="mainImage"
@@ -23,11 +23,11 @@
             onmouseleave="zoomLeave()">
           <div id="zoomLens" class="absolute pointer-events-none hidden"
             style="width:120px;height:120px;border:2px solid rgba(255,255,255,0.6);border-radius:50%;background:rgba(255,255,255,0.15);transform:translate(-50%,-50%)"></div>
-          <div id="zoomResult" class="fixed hidden z-50 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-600"
+          <div id="zoomResult" class="fixed hidden z-50 rounded-xl shadow-2xl border border-color"
             style="width:400px;height:400px;background-repeat:no-repeat;background-size:200%"></div>
         <?php else: ?>
           <div class="flex items-center justify-center" style="min-height:480px">
-            <svg class="w-24 h-24 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            <svg class="w-24 h-24 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
           </div>
         <?php endif; ?>
         <?php if ($product['sale_price']): ?>
@@ -38,38 +38,38 @@
 
     <!-- Details -->
     <div>
-      <p class="text-sm text-gray-500 dark:text-gray-400 mb-2"><?= escape($product['category_name'] ?? '') ?></p>
+      <p class="text-sm text-muted mb-2"><?= escape($product['category_name'] ?? '') ?></p>
       <h1 class="text-3xl font-bold mb-4"><?= escape($product['name']) ?></h1>
 
       <!-- Rating summary -->
       <?php if ($reviewCount > 0): ?>
         <div class="flex items-center gap-2 mb-4">
           <div class="flex"><?php for ($i = 1; $i <= 5; $i++): ?>
-            <svg class="w-4 h-4 <?= $i <= round($avgRating) ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600' ?>" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4" style="<?= $i <= round($avgRating) ? 'color:var(--warning)' : 'color:var(--muted-text)' ?>" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
           <?php endfor; ?></div>
-          <span class="text-sm text-gray-500 dark:text-gray-400"><?= $avgRating ?> (<?= $reviewCount ?> <?= __('product_reviews') ?>)</span>
+          <span class="text-sm text-muted"><?= $avgRating ?> (<?= $reviewCount ?> <?= __('product_reviews') ?>)</span>
         </div>
       <?php endif; ?>
 
       <div class="flex items-center gap-3 mb-6">
         <?php if ($product['sale_price']): ?>
           <span class="text-3xl font-bold" style="color: var(--primary)"><?= $SETTINGS['currency'] ?><?= number_format($product['sale_price'], 2) ?></span>
-          <span class="text-xl text-gray-400 line-through"><?= $SETTINGS['currency'] ?><?= number_format($product['price'], 2) ?></span>
-          <span class="bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 text-sm px-2 py-1 rounded">-<?= round((1 - $product['sale_price'] / $product['price']) * 100) ?>%</span>
+          <span class="text-xl text-muted line-through"><?= $SETTINGS['currency'] ?><?= number_format($product['price'], 2) ?></span>
+          <span class="text-sm px-2 py-1 rounded" style="background:color-mix(in srgb, var(--error) 15%, white);color:var(--error)">-<?= round((1 - $product['sale_price'] / $product['price']) * 100) ?>%</span>
         <?php else: ?>
           <span class="text-3xl font-bold" style="color: var(--primary)"><?= $SETTINGS['currency'] ?><?= number_format($product['price'], 2) ?></span>
         <?php endif; ?>
       </div>
 
       <?php if ($product['stock'] > 0): ?>
-        <p class="text-sm text-green-600 dark:text-green-400 mb-1">✔ <?= __('product_in_stock') ?></p>
+        <p class="text-sm mb-1" style="color:var(--success)">✔ <?= __('product_in_stock') ?></p>
         <?php if ($product['stock'] <= 5): ?>
           <p class="text-sm text-orange-500 mb-4 font-medium"><?= sprintf(__('product_low_stock'), $product['stock']) ?></p>
-          <div class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full mb-4 overflow-hidden">
+          <div class="w-full h-2 bg-input rounded-full mb-4 overflow-hidden">
             <div class="h-full bg-orange-500 rounded-full" style="width:<?= min(100, ($product['stock'] / 10) * 100) ?>%"></div>
           </div>
         <?php else: ?>
-          <p class="text-sm text-gray-500 dark:text-gray-400 mb-4"><?= __('product_stock_available') ?></p>
+          <p class="text-sm text-muted mb-4"><?= __('product_stock_available') ?></p>
         <?php endif; ?>
 
         <form action="/cart" method="POST" class="space-y-4">
@@ -88,7 +88,7 @@
                 <?php foreach ($sizes as $i => $size): ?>
                   <label class="cursor-pointer">
                     <input type="radio" name="size" value="<?= escape($size) ?>" class="sr-only peer" required <?= $i === 0 ? 'checked' : '' ?>>
-                    <span class="block px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm transition-all hover:border-gray-400"><?= escape($size) ?></span>
+                    <span class="block px-4 py-2 border border-input rounded-lg text-sm transition-all hover:border-input"><?= escape($size) ?></span>
                   </label>
                 <?php endforeach; ?>
               </div>
@@ -102,7 +102,7 @@
                 <?php foreach ($colors as $i => $color): ?>
                   <label class="cursor-pointer">
                     <input type="radio" name="color" value="<?= escape($color) ?>" class="sr-only peer" <?= $i === 0 ? 'checked' : '' ?>>
-                    <span class="block px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm transition-all hover:border-gray-400"><?= escape($color) ?></span>
+                    <span class="block px-4 py-2 border border-input rounded-lg text-sm transition-all hover:border-input"><?= escape($color) ?></span>
                   </label>
                 <?php endforeach; ?>
               </div>
@@ -112,9 +112,9 @@
           <div>
             <label class="block text-sm font-medium mb-2"><?= __('product_quantity') ?></label>
             <div class="flex items-center gap-2">
-              <button type="button" onclick="qtyChange(-1)" class="w-9 h-9 rounded-lg border border-gray-300 dark:border-gray-600 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 transition">−</button>
-              <input type="number" name="quantity" id="qtyInput" value="1" min="1" max="<?= $product['stock'] ?>" class="w-16 text-center border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800">
-              <button type="button" onclick="qtyChange(1)" class="w-9 h-9 rounded-lg border border-gray-300 dark:border-gray-600 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 transition">+</button>
+              <button type="button" onclick="qtyChange(-1)" class="w-9 h-9 rounded-lg border border-input flex items-center justify-center hover:bg-input transition">−</button>
+              <input type="number" name="quantity" id="qtyInput" value="1" min="1" max="<?= $product['stock'] ?>" class="w-16 text-center border border-input rounded-lg px-3 py-2 bg-card">
+              <button type="button" onclick="qtyChange(1)" class="w-9 h-9 rounded-lg border border-input flex items-center justify-center hover:bg-input transition">+</button>
             </div>
           </div>
 
@@ -125,7 +125,7 @@
         </form>
 
         <!-- Share buttons -->
-        <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+        <div class="mt-6 pt-6 border-t border-color">
           <p class="text-sm font-medium mb-3"><?= __('product_share') ?></p>
           <div class="flex gap-2">
             <?php $shareUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/product/' . $product['slug']; ?>
@@ -138,28 +138,28 @@
             <a href="https://twitter.com/intent/tweet?text=<?= urlencode($product['name']) ?>&url=<?= urlencode($shareUrl) ?>" target="_blank" class="w-9 h-9 rounded-full bg-black dark:bg-white text-white dark:text-black flex items-center justify-center hover:opacity-80 transition" title="Twitter">
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
-            <button type="button" onclick="copyShareLink('<?= urlencode($shareUrl) ?>')" class="w-9 h-9 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition" title="<?= __('product_copy_link') ?>">
+            <button type="button" onclick="copyShareLink('<?= urlencode($shareUrl) ?>')" class="w-9 h-9 rounded-full bg-input text-body flex items-center justify-center hover:bg-input transition" title="<?= __('product_copy_link') ?>">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
             </button>
           </div>
         </div>
       <?php else: ?>
-        <p class="text-red-500 font-medium text-lg"><?= __('product_out_of_stock') ?></p>
+        <p class="font-medium text-lg" style="color:var(--error)"><?= __('product_out_of_stock') ?></p>
       <?php endif; ?>
     </div>
   </div>
 
   <!-- Tabs: Description / Details / Reviews -->
   <div class="mt-12">
-    <div class="flex border-b border-gray-200 dark:border-gray-700">
+    <div class="flex border-b border-color">
       <button type="button" class="tab-btn px-6 py-3 text-sm font-medium border-b-2 transition" data-tab="description" style="border-color:var(--primary);color:var(--primary)"><?= __('product_description') ?></button>
-      <button type="button" class="tab-btn px-6 py-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b-2 border-transparent hover:text-gray-700 dark:hover:text-gray-300 transition" data-tab="details"><?= __('product_details') ?></button>
-      <button type="button" class="tab-btn px-6 py-3 text-sm font-medium text-gray-500 dark:text-gray-400 border-b-2 border-transparent hover:text-gray-700 dark:hover:text-gray-300 transition" data-tab="reviews"><?= __('product_reviews') ?> <?php if ($reviewCount > 0): ?><span class="ml-1 text-xs bg-gray-200 dark:bg-gray-700 px-2 py-0.5 rounded-full"><?= $reviewCount ?></span><?php endif; ?></button>
+      <button type="button" class="tab-btn px-6 py-3 text-sm font-medium text-muted border-b-2 border-transparent hover:text-body transition" data-tab="details"><?= __('product_details') ?></button>
+      <button type="button" class="tab-btn px-6 py-3 text-sm font-medium text-muted border-b-2 border-transparent hover:text-body transition" data-tab="reviews"><?= __('product_reviews') ?> <?php if ($reviewCount > 0): ?><span class="ml-1 text-xs bg-input px-2 py-0.5 rounded-full"><?= $reviewCount ?></span><?php endif; ?></button>
     </div>
 
     <!-- Description tab -->
     <div class="tab-content py-6" id="tab-description">
-      <div class="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-400">
+      <div class="prose dark:prose-invert max-w-none text-muted">
         <?= nl2br(escape($product['description'])) ?>
       </div>
     </div>
@@ -170,17 +170,17 @@
         <?php if (!empty($product['material'])): ?>
           <div>
             <h3 class="text-lg font-semibold mb-3"><?= __('product_material') ?></h3>
-            <p class="text-gray-600 dark:text-gray-400"><?= escape($product['material']) ?></p>
+            <p class="text-muted"><?= escape($product['material']) ?></p>
           </div>
         <?php endif; ?>
         <?php if (!empty($product['measurement_guide'])): ?>
           <div>
             <h3 class="text-lg font-semibold mb-3"><?= __('product_measurements') ?></h3>
-            <div class="text-gray-600 dark:text-gray-400 text-sm"><?= $product['measurement_guide'] ?></div>
+            <div class="text-muted text-sm"><?= $product['measurement_guide'] ?></div>
           </div>
         <?php endif; ?>
         <?php if (empty($product['material']) && empty($product['measurement_guide'])): ?>
-          <p class="text-gray-400"><?= __('product_no_details') ?></p>
+          <p class="text-muted"><?= __('product_no_details') ?></p>
         <?php endif; ?>
       </div>
     </div>
@@ -189,10 +189,10 @@
     <div class="tab-content hidden py-6" id="tab-reviews">
       <!-- Review form -->
       <?php if (!$userReviewed): ?>
-        <div class="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-6 mb-8">
+        <div class="bg-page rounded-xl p-6 mb-8">
           <h3 class="text-lg font-semibold mb-4"><?= __('product_write_review') ?></h3>
           <?php if (!empty($reviewError)): ?>
-            <p class="text-red-500 text-sm mb-3"><?= $reviewError ?></p>
+            <p class="text-sm mb-3" style="color:var(--error)"><?= $reviewError ?></p>
           <?php endif; ?>
           <form method="POST" class="space-y-4">
             <div>
@@ -200,7 +200,7 @@
               <div class="flex gap-1 star-rating">
                 <?php for ($i = 5; $i >= 1; $i--): ?>
                   <input type="radio" name="rating" value="<?= $i ?>" id="star<?= $i ?>" class="sr-only peer">
-                  <label for="star<?= $i ?>" class="cursor-pointer text-gray-300 dark:text-gray-600 peer-checked:text-yellow-400 hover:text-yellow-400 transition-colors">
+                  <label for="star<?= $i ?>" class="cursor-pointer text-muted transition-colors">
                     <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                   </label>
                 <?php endfor; ?>
@@ -209,19 +209,19 @@
             <?php if (!isLoggedIn()): ?>
               <div>
                 <label class="block text-sm font-medium mb-2"><?= __('product_review_name') ?></label>
-                <input type="text" name="user_name" class="input w-full max-w-sm border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800" required>
+                <input type="text" name="user_name" class="input w-full max-w-sm border border-input rounded-lg px-3 py-2 bg-card" required>
               </div>
             <?php endif; ?>
             <div>
               <label class="block text-sm font-medium mb-2"><?= __('product_review_text') ?></label>
-              <textarea name="review_text" rows="4" class="input w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800" required></textarea>
+              <textarea name="review_text" rows="4" class="input w-full border border-input rounded-lg px-3 py-2 bg-card" required></textarea>
             </div>
             <button type="submit" name="submit_review" class="btn-primary"><?= __('product_review_submit') ?></button>
           </form>
         </div>
       <?php else: ?>
-        <div class="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-6 mb-8 text-center">
-          <p class="text-gray-500 dark:text-gray-400"><?= __('product_review_already') ?></p>
+        <div class="bg-page rounded-xl p-6 mb-8 text-center">
+          <p class="text-muted"><?= __('product_review_already') ?></p>
         </div>
       <?php endif; ?>
 
@@ -229,27 +229,27 @@
       <?php if (!empty($reviews)): ?>
         <div class="space-y-4">
           <?php foreach ($reviews as $review): ?>
-            <div class="bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-200 dark:border-gray-700">
+            <div class="bg-card rounded-xl p-5 border border-color">
               <div class="flex items-center justify-between mb-2">
                 <div class="flex items-center gap-3">
-                  <div class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-sm font-medium text-gray-600 dark:text-gray-300">
+                  <div class="w-8 h-8 rounded-full bg-input flex items-center justify-center text-sm font-medium text-body">
                     <?= strtoupper(substr($review['user_name'], 0, 1)) ?>
                   </div>
                   <div>
                     <p class="text-sm font-semibold"><?= escape($review['user_name']) ?></p>
-                    <p class="text-xs text-gray-400"><?= date('M j, Y', strtotime($review['created_at'])) ?></p>
+                    <p class="text-xs text-muted"><?= date('M j, Y', strtotime($review['created_at'])) ?></p>
                   </div>
                 </div>
                 <div class="flex"><?php for ($i = 1; $i <= 5; $i++): ?>
-                  <svg class="w-4 h-4 <?= $i <= $review['rating'] ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600' ?>" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                  <svg class="w-4 h-4" style="<?= $i <= $review['rating'] ? 'color:var(--warning)' : 'color:var(--muted-text)' ?>" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                 <?php endfor; ?></div>
               </div>
-              <p class="text-gray-600 dark:text-gray-400 text-sm"><?= nl2br(escape($review['text'])) ?></p>
+              <p class="text-muted text-sm"><?= nl2br(escape($review['text'])) ?></p>
             </div>
           <?php endforeach; ?>
         </div>
       <?php else: ?>
-        <p class="text-gray-400 text-center py-8"><?= __('product_no_reviews') ?></p>
+        <p class="text-muted text-center py-8"><?= __('product_no_reviews') ?></p>
       <?php endif; ?>
     </div>
   </div>
@@ -260,7 +260,7 @@
       <h2 class="text-xl font-bold mb-6"><?= __('product_related') ?></h2>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         <?php foreach ($related as $rel): ?>
-          <a href="/product/<?= escape($rel['slug']) ?>" class="product-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700">
+          <a href="/product/<?= escape($rel['slug']) ?>" class="product-card bg-card rounded-xl overflow-hidden shadow-sm border border-color">
             <?php $relImages = json_decode($rel['images'] ?? '[]', true); if (!empty($relImages[0])): ?>
               <img src="/<?= $relImages[0] ?>" alt="<?= escape($rel['name']) ?>" class="w-full h-40 object-cover">
             <?php else: ?>
@@ -281,12 +281,12 @@
 
 <!-- Size Chart Modal -->
 <div id="sizeChartModal" class="fixed inset-0 z-50 hidden bg-black/50 flex items-center justify-center p-4" onclick="if (event.target === this) closeSizeChart()">
-  <div class="bg-white dark:bg-gray-800 rounded-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto p-6">
+  <div class="bg-card rounded-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto p-6">
     <div class="flex items-center justify-between mb-4">
       <h3 class="text-lg font-bold"><?= __('product_size_chart') ?></h3>
-      <button onclick="closeSizeChart()" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition">&times;</button>
+      <button onclick="closeSizeChart()" class="w-8 h-8 rounded-full bg-input flex items-center justify-center hover:bg-input transition">&times;</button>
     </div>
-    <div class="text-gray-600 dark:text-gray-400 text-sm"><?= $product['measurement_guide'] ?></div>
+    <div class="text-muted text-sm"><?= $product['measurement_guide'] ?></div>
   </div>
 </div>
 
@@ -294,7 +294,7 @@
   .star-rating input:checked ~ label,
   .star-rating label:hover,
   .star-rating label:hover ~ label {
-    color: #facc15 !important;
+    color: var(--warning) !important;
   }
   .peer:checked + span {
     background-color: var(--primary) !important;
@@ -312,7 +312,7 @@ function setMainImage(thumb, src, index) {
   const result = document.getElementById('zoomResult');
   if (result) result.style.backgroundImage = 'url(' + src + ')';
   document.querySelectorAll('.gallery-thumb').forEach(t => {
-    t.className = t.className.replace('border-primary shadow-sm', 'border-gray-200 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500');
+    t.className = t.className.replace('border-primary shadow-sm', 'border-color hover:border-input');
   });
   thumb.className = 'gallery-thumb w-16 h-16 object-cover rounded-lg border-2 cursor-pointer transition-all duration-150 border-primary shadow-sm';
 }
@@ -361,7 +361,7 @@ function copyShareLink(url) {
   navigator.clipboard.writeText(decoded).then(() => {
     const btn = event.currentTarget;
     const orig = btn.innerHTML;
-    btn.innerHTML = '<svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>';
+    btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color:var(--success)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>';
     setTimeout(() => btn.innerHTML = orig, 2000);
   });
 }
@@ -380,11 +380,11 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.tab-btn').forEach(b => {
         b.style.color = '';
         b.style.borderColor = 'transparent';
-        b.classList.add('text-gray-500', 'dark:text-gray-400');
+        b.classList.add('text-muted');
       });
       btn.style.borderColor = 'var(--primary)';
       btn.style.color = 'var(--primary)';
-      btn.classList.remove('text-gray-500', 'dark:text-gray-400');
+      btn.classList.remove('text-muted');
       document.querySelectorAll('.tab-content').forEach(tc => tc.classList.add('hidden'));
       document.getElementById('tab-' + btn.dataset.tab).classList.remove('hidden');
     });

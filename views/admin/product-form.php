@@ -77,7 +77,7 @@
           </div>
         </div>
         <div class="flex items-center gap-2">
-          <input type="checkbox" name="featured" value="1" id="featured" <?= $product && $product['featured'] ? 'checked' : '' ?> class="rounded border-gray-300 dark:border-gray-600">
+          <input type="checkbox" name="featured" value="1" id="featured" <?= $product && $product['featured'] ? 'checked' : '' ?> class="rounded border-input">
           <label for="featured" class="mb-0">Featured product</label>
         </div>
         <div>
@@ -100,8 +100,8 @@
           <div class="flex flex-wrap gap-3 mb-4" id="existingImages">
             <?php foreach ($existingImages as $i => $img): ?>
               <div class="relative group" data-index="<?= $i ?>">
-                <img src="/<?= $img ?>" class="w-24 h-24 object-cover rounded-lg border border-gray-200 dark:border-gray-600">
-                <button type="button" class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full text-sm leading-none hidden group-hover:flex items-center justify-center" onclick="removeImage(this, <?= $i ?>)">&times;</button>
+                <img src="/<?= $img ?>" class="w-24 h-24 object-cover rounded-lg border border-color">
+                <button type="button" class="absolute -top-2 -right-2 w-6 h-6 rounded-full text-sm leading-none hidden group-hover:flex items-center justify-center" style="background:color-mix(in srgb, var(--error) 15%, white);color:var(--error)" onclick="removeImage(this, <?= $i ?>)">&times;</button>
                 <input type="hidden" name="existing_images[]" value="<?= $img ?>">
               </div>
             <?php endforeach; ?>
@@ -109,10 +109,10 @@
         <?php endif; ?>
 
         <label>Upload new images</label>
-        <div class="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl p-6 text-center hover:border-primary transition cursor-pointer" id="dropZone" onclick="document.getElementById('fileInput').click()">
-          <svg class="w-10 h-10 mx-auto mb-2 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          <p class="text-sm text-gray-500">Click or drag images here</p>
-          <p class="text-xs text-gray-400 mt-1">PNG, JPG, WebP up to 5MB each</p>
+        <div class="border-2 border-dashed border-input rounded-xl p-6 text-center hover:border-primary transition cursor-pointer" id="dropZone" onclick="document.getElementById('fileInput').click()">
+          <svg class="w-10 h-10 mx-auto mb-2 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <p class="text-sm text-body">Click or drag images here</p>
+          <p class="text-xs text-muted mt-1">PNG, JPG, WebP up to 5MB each</p>
           <input type="file" name="images[]" id="fileInput" accept="image/png,image/jpeg,image/webp" multiple class="hidden" onchange="previewFiles(this.files)">
         </div>
         <div class="flex flex-wrap gap-3 mt-4" id="newPreviews"></div>
@@ -150,7 +150,7 @@ function previewFiles(files) {
     reader.onload = e => {
       const div = document.createElement('div');
       div.className = 'relative';
-      div.innerHTML = `<img src="${e.target.result}" class="w-24 h-24 object-cover rounded-lg border border-gray-200 dark:border-gray-600">`;
+      div.innerHTML = `<img src="${e.target.result}" class="w-24 h-24 object-cover rounded-lg border border-color">`;
       container.appendChild(div);
     };
     reader.readAsDataURL(file);

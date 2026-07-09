@@ -24,7 +24,7 @@
         <?php foreach ($coupons as $c): ?>
           <tr>
             <td class="font-mono font-bold"><?= escape($c['code']) ?></td>
-            <td><span class="badge" style="background:#dbeafe;color:#1e40af"><?= $c['type'] === 'percentage' ? '%' : '$' ?></span></td>
+            <td><span class="badge" style="background:color-mix(in srgb, var(--primary) 15%, white);color:var(--primary)"><?= $c['type'] === 'percentage' ? '%' : '$' ?></span></td>
             <td><?= $c['type'] === 'percentage' ? $c['value'] . '%' : '$' . number_format($c['value'], 2) ?></td>
             <td><?= $c['min_amount'] > 0 ? '$' . number_format($c['min_amount'], 2) : '-' ?></td>
             <td><?= $c['max_discount'] > 0 ? '$' . number_format($c['max_discount'], 2) : '-' ?></td>
@@ -33,9 +33,9 @@
             <td class="text-sm"><?= $c['expires_at'] ? date('M j, Y', strtotime($c['expires_at'])) : '-' ?></td>
             <td>
               <?php if ($c['is_active']): ?>
-                <span class="badge" style="background:#d1fae5;color:#065f46">Active</span>
+                <span class="badge" style="background:color-mix(in srgb, var(--success) 15%, white);color:var(--success)">Active</span>
               <?php else: ?>
-                <span class="badge" style="background:#fee2e2;color:#991b1b">Inactive</span>
+                <span class="badge" style="background:color-mix(in srgb, var(--error) 15%, white);color:var(--error)">Inactive</span>
               <?php endif; ?>
             </td>
             <td>
@@ -47,7 +47,7 @@
           </tr>
         <?php endforeach; ?>
         <?php if (empty($coupons)): ?>
-          <tr><td colspan="10" class="text-center py-8 text-gray-500">No coupons yet.</td></tr>
+          <tr><td colspan="10" class="text-center py-8 text-muted">No coupons yet.</td></tr>
         <?php endif; ?>
       </tbody>
     </table>

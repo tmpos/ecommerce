@@ -19,7 +19,7 @@
     }
   ?>
 
-  <footer class="mt-12 bg-[#101010] text-gray-200">
+  <footer class="mt-12 bg-[#101010] text-body">
     <section id="newsletter" class="" style="background:var(--primary)">
       <div class="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div>
@@ -33,8 +33,8 @@
           </div>
         </div>
         <form method="POST" action="/newsletter" class="flex flex-col sm:flex-row gap-3 md:justify-end">
-          <input type="email" name="email" required placeholder="Correo" class="w-full sm:max-w-sm rounded-md border border-black/20 px-5 py-4 text-sm text-white placeholder:text-gray-500 outline-none focus:ring-2 focus:ring-white/40" style="background:var(--dark-bg)">
-          <button type="submit" class="rounded-md bg-[#151515] px-8 py-4 text-sm font-bold text-white hover:bg-black transition">APLICAR</button>
+          <input type="email" name="email" required placeholder="Correo" class="w-full sm:max-w-sm rounded-md border border-black/20 px-5 py-4 text-sm text-white placeholder:text-muted outline-none focus:ring-2 focus:ring-white/40" style="background:var(--dark-bg)">
+          <button type="submit" class="rounded-md px-8 py-4 text-sm font-bold text-white hover:bg-black transition" style="background:var(--primary)">APLICAR</button>
         </form>
       </div>
     </section>
@@ -47,8 +47,8 @@
           <?php else: ?>
             <h4 class="text-2xl font-bold text-white mb-6"><?= escape($SETTINGS['site_name'] ?? 'Store') ?></h4>
           <?php endif; ?>
-          <p class="text-sm leading-7 text-gray-400 max-w-xs"><?= escape($footerDescription) ?></p>
-          <div class="flex items-center gap-5 mt-8 text-gray-300">
+          <p class="text-sm leading-7 text-muted max-w-xs"><?= escape($footerDescription) ?></p>
+          <div class="flex items-center gap-5 mt-8 text-body">
             <a href="<?= escape($facebookUrl) ?>" class="hover:text-white" aria-label="Facebook"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.8c0-.9.3-1.5 1.6-1.5h1.7V4.5c-.8-.1-1.6-.2-2.5-.2-2.5 0-4.2 1.5-4.2 4.3v2.3H7.3V14h2.8v8h3.4z"/></svg></a>
             <a href="<?= escape($instagramUrl) ?>" class="hover:text-white" aria-label="Instagram"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect width="16" height="16" x="4" y="4" rx="4" stroke-width="1.8"/><circle cx="12" cy="12" r="3.5" stroke-width="1.8"/><path stroke-linecap="round" stroke-width="2" d="M17.5 6.8h.01"/></svg></a>
             <a href="<?= escape($whatsappUrl) ?>" class="hover:text-white" aria-label="WhatsApp"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3.5A8.4 8.4 0 004.9 16.4L4 20.5l4.2-1.1A8.4 8.4 0 1012 3.5zm0 1.7a6.7 6.7 0 013.4 12.5 6.7 6.7 0 01-6.8.1l-.3-.2-2.1.6.5-2.1-.2-.3A6.7 6.7 0 0112 5.2zm-2.3 3.4c-.2 0-.5.1-.7.3-.3.3-.9.9-.9 2.1 0 1.3.9 2.5 1 2.6.2.2 1.8 2.8 4.3 3.8 2.1.9 2.5.7 3 .7.5 0 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.7.9c-.1.2-.3.2-.5.1-.3-.1-1.1-.4-2-1.2-.8-.7-1.3-1.5-1.4-1.8-.2-.2 0-.4.1-.5l.4-.5c.1-.1.2-.3.3-.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.4-.4-.4-.6-.4h-.6z"/></svg></a>
@@ -58,7 +58,7 @@
 
         <div>
           <h4 class="text-white font-semibold mb-6">Categorias</h4>
-          <div class="space-y-5 text-sm text-gray-400">
+          <div class="space-y-5 text-sm text-muted">
             <?php foreach ($footerCategories as $cat): ?>
               <a href="/shop?category=<?= escape($cat['slug']) ?>" class="flex items-center gap-3 hover:text-white">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -70,7 +70,7 @@
 
         <div>
           <h4 class="text-white font-semibold mb-6">Soporte</h4>
-          <div class="space-y-5 text-sm text-gray-400">
+          <div class="space-y-5 text-sm text-muted">
             <a href="/policies" class="flex items-center gap-3 hover:text-white"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M12 6v6l4 2"/></svg>Contacto</a>
             <a href="/policies" class="flex items-center gap-3 hover:text-white"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"/></svg>Privacidad</a>
             <a href="/policies" class="flex items-center gap-3 hover:text-white"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M4 4v6h6M20 20v-6h-6M20 9A8 8 0 006.6 5.4L4 8m0 7a8 8 0 0013.4 3.6L20 16"/></svg>Devoluciones</a>
@@ -80,7 +80,7 @@
 
         <div>
           <h4 class="text-white font-semibold mb-6">Contacto</h4>
-          <div class="space-y-5 text-sm text-gray-300">
+          <div class="space-y-5 text-sm text-body">
             <div class="flex gap-3">
               <svg class="w-5 h-5 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M12 21s7-4.4 7-11a7 7 0 10-14 0c0 6.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.5" stroke-width="1.7"/></svg>
               <span><?= escape($footerAddress) ?><br><?= escape($footerCountry) ?></span>
@@ -91,7 +91,7 @@
         </div>
       </div>
 
-      <div class="mt-14 pt-8 border-t border-white/10 flex flex-col md:flex-row gap-4 items-center justify-between text-xs text-gray-500">
+      <div class="mt-14 pt-8 border-t border-white/10 flex flex-col md:flex-row gap-4 items-center justify-between text-xs text-muted">
         <p><?= escape($SETTINGS['footer_copyright'] ?? ('© ' . date('Y') . ' TMPOS SRL. Todos los derechos reservados.')) ?></p>
         <div class="flex items-center gap-6">
           <a href="/policies" class="hover:text-white">Terminos</a>

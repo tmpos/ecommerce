@@ -2,7 +2,7 @@
   <h1 class="text-3xl font-bold mb-8">Frequently Asked Questions</h1>
 
   <?php if (empty($items)): ?>
-    <p style="color:#94a3b8">No FAQs available.</p>
+    <p class="text-muted">No FAQs available.</p>
   <?php else: ?>
     <?php
       $grouped = [];
@@ -17,9 +17,9 @@
         <div class="card" style="margin-bottom:.75rem;overflow:hidden">
           <button onclick="this.nextElementSibling.classList.toggle('hidden');this.querySelector('svg').classList.toggle('rotate-180')" style="width:100%;display:flex;justify-content:space-between;align-items:center;padding:1rem 1.25rem;background:none;border:none;cursor:pointer;text-align:left;font-size:.9375rem;font-weight:500;color:inherit">
             <span><?= escape($item['question']) ?></span>
-            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:1.25rem;height:1.25rem;flex-shrink:0;transition:transform .2s;color:#94a3b8"><polyline points="6 9 12 15 18 9"/></svg>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:1.25rem;height:1.25rem;flex-shrink:0;transition:transform .2s;color:var(--secondary)"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
-          <div class="hidden" style="padding:0 1.25rem 1.25rem;font-size:.875rem;line-height:1.7;color:#64748b">
+          <div class="hidden text-body" style="padding:0 1.25rem 1.25rem;font-size:.875rem;line-height:1.7">
             <?= nl2br(escape($item['answer'])) ?>
           </div>
         </div>

@@ -19,7 +19,7 @@
     <?php foreach ($page['sections'] as $section): ?>
       <div style="margin-bottom:3rem">
         <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:1rem"><?= escape($section['title']) ?></h2>
-        <div style="line-height:1.8;font-size:1rem;color:#475569"><?= nl2br(escape($section['content'])) ?></div>
+        <div class="text-body" style="line-height:1.8;font-size:1rem"><?= nl2br(escape($section['content'])) ?></div>
       </div>
     <?php endforeach; ?>
   </div>

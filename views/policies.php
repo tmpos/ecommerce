@@ -2,25 +2,25 @@
   <h1 class="text-3xl font-bold mb-8"><?= __('nav_policies') ?></h1>
 
   <?php if (empty($pages)): ?>
-    <div class="space-y-8 text-gray-600 dark:text-gray-400">
+    <div class="space-y-8 text-muted">
       <section>
-        <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">Shipping Policy</h2>
+        <h2 class="text-xl font-semibold text-heading mb-3">Shipping Policy</h2>
         <p>We offer free shipping on all orders over <?= $SETTINGS['currency'] ?><?= number_format($SETTINGS['free_shipping_min'], 2) ?>. Standard shipping costs <?= $SETTINGS['currency'] ?><?= number_format($SETTINGS['shipping_cost'], 2) ?> and takes 5-7 business days. Express shipping is available at an additional cost.</p>
       </section>
       <section>
-        <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">Return Policy</h2>
+        <h2 class="text-xl font-semibold text-heading mb-3">Return Policy</h2>
         <p>You may return unworn items within 30 days of delivery for a full refund. Items must be in original condition with tags attached.</p>
       </section>
       <section>
-        <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">Privacy Policy</h2>
+        <h2 class="text-xl font-semibold text-heading mb-3">Privacy Policy</h2>
         <p>We respect your privacy. Your personal information is securely stored and will never be shared with third parties without your consent.</p>
       </section>
       <section>
-        <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">Terms of Service</h2>
+        <h2 class="text-xl font-semibold text-heading mb-3">Terms of Service</h2>
         <p>All prices are in <?= $SETTINGS['currency'] ?> and may change without notice. We reserve the right to cancel any order due to pricing errors or stock unavailability.</p>
       </section>
       <section>
-        <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">Contact</h2>
+        <h2 class="text-xl font-semibold text-heading mb-3">Contact</h2>
         <p>For any questions, please contact us at support@<?= preg_replace('/[^a-zA-Z0-9]/', '', strtolower($SETTINGS['site_name'])) ?>.com</p>
       </section>
     </div>

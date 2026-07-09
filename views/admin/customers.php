@@ -1,34 +1,34 @@
 <div class="max-w-7xl">
   <div class="flex justify-between items-center mb-6">
-    <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100"><?= __('admin_customers') ?></h1>
+    <h1 class="text-2xl font-bold text-heading"><?= __('admin_customers') ?></h1>
   </div>
 
   <div class="flex flex-wrap gap-3 mb-4 items-end">
     <div>
-      <label class="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 block">Search</label>
+      <label class="text-xs font-medium text-muted mb-1 block">Search</label>
       <input type="text" id="customerSearch" placeholder="Name, email..." class="input" style="width:260px" oninput="filterCustomers()">
     </div>
     <div style="margin-left:auto">
-      <span id="customerCount" class="text-sm text-gray-500 dark:text-gray-400"></span>
+      <span id="customerCount" class="text-sm text-muted"></span>
     </div>
   </div>
 
   <?php if (empty($customers)): ?>
     <div class="card">
-      <div class="card-body text-center py-12 text-gray-500 dark:text-gray-400"><?= __('admin_no_customers') ?></div>
+      <div class="card-body text-center py-12 text-muted"><?= __('admin_no_customers') ?></div>
     </div>
   <?php else: ?>
     <div class="table-wrap">
       <table id="customersTable">
         <thead>
           <tr>
-            <th class="text-gray-700 dark:text-gray-300"><?= __('auth_name') ?></th>
-            <th class="text-gray-700 dark:text-gray-300"><?= __('auth_email') ?></th>
-            <th style="text-align:center" class="text-gray-700 dark:text-gray-300"><?= __('admin_orders') ?></th>
-            <th style="text-align:right" class="text-gray-700 dark:text-gray-300"><?= __('admin_total') ?></th>
-            <th style="text-align:right" class="text-gray-700 dark:text-gray-300"><?= __('order_date') ?></th>
-            <th style="text-align:center" class="text-gray-700 dark:text-gray-300">Orders</th>
-            <th style="text-align:center" class="text-gray-700 dark:text-gray-300">Actions</th>
+            <th class="text-body"><?= __('auth_name') ?></th>
+            <th class="text-body"><?= __('auth_email') ?></th>
+            <th style="text-align:center" class="text-body"><?= __('admin_orders') ?></th>
+            <th style="text-align:right" class="text-body"><?= __('admin_total') ?></th>
+            <th style="text-align:right" class="text-body"><?= __('order_date') ?></th>
+            <th style="text-align:center" class="text-body">Orders</th>
+            <th style="text-align:center" class="text-body">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -36,11 +36,11 @@
             <tr class="customer-row"
               data-name="<?= escape(strtolower($c['name'])) ?>"
               data-email="<?= escape(strtolower($c['email'])) ?>">
-              <td class="font-medium text-gray-900 dark:text-gray-200"><?= escape($c['name']) ?></td>
-              <td class="text-gray-500 dark:text-gray-400"><?= escape($c['email']) ?></td>
-              <td style="text-align:center" class="text-gray-900 dark:text-gray-300"><?= $c['order_count'] ?></td>
-              <td style="text-align:right;font-weight:600" class="text-gray-900 dark:text-gray-100"><?= $SETTINGS['currency'] ?><?= number_format($c['total_spent'], 2) ?></td>
-              <td style="text-align:right;white-space:nowrap" class="text-sm text-gray-500 dark:text-gray-400"><?= date('M j, Y', strtotime($c['created_at'])) ?></td>
+              <td class="font-medium text-heading"><?= escape($c['name']) ?></td>
+              <td class="text-muted"><?= escape($c['email']) ?></td>
+              <td style="text-align:center" class="text-body"><?= $c['order_count'] ?></td>
+              <td style="text-align:right;font-weight:600" class="text-heading"><?= $SETTINGS['currency'] ?><?= number_format($c['total_spent'], 2) ?></td>
+              <td style="text-align:right;white-space:nowrap" class="text-sm text-muted"><?= date('M j, Y', strtotime($c['created_at'])) ?></td>
               <td style="text-align:center">
                 <a href="/admin/orders?customer=<?= urlencode($c['email']) ?>" class="btn btn-sm btn-outline">View Orders</a>
                 <form method="POST" action="/admin/customers/delete/<?= $c['id'] ?>" style="display:inline" onsubmit="return confirm('Delete customer <?= escape($c['name']) ?>? This cannot be undone.')">

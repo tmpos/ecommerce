@@ -1,6 +1,6 @@
-<div style="display:flex;gap:.5rem;margin-bottom:1.5rem;border-bottom:2px solid #e2e8f0;padding-bottom:0">
-  <a href="/admin/policies" style="padding:.625rem 1.25rem;font-size:.875rem;font-weight:500;text-decoration:none;color:<?= $tab === 'list' ? 'var(--primary)' : '#64748b' ?>;border-bottom:2px solid <?= $tab === 'list' ? 'var(--primary)' : 'transparent' ?>;margin-bottom:-2px">All Pages</a>
-  <a href="/admin/policies/create" style="padding:.625rem 1.25rem;font-size:.875rem;font-weight:500;text-decoration:none;color:<?= $tab === 'edit' ? 'var(--primary)' : '#64748b' ?>;border-bottom:2px solid <?= $tab === 'edit' ? 'var(--primary)' : 'transparent' ?>;margin-bottom:-2px"><?= $editPage ? 'Edit Page' : 'New Page' ?></a>
+<div style="display:flex;gap:.5rem;margin-bottom:1.5rem;border-bottom:2px solid var(--border-color);padding-bottom:0">
+  <a href="/admin/policies" style="padding:.625rem 1.25rem;font-size:.875rem;font-weight:500;text-decoration:none;color:<?= $tab === 'list' ? 'var(--primary)' : 'var(--text-muted)' ?>;border-bottom:2px solid <?= $tab === 'list' ? 'var(--primary)' : 'transparent' ?>;margin-bottom:-2px">All Pages</a>
+  <a href="/admin/policies/create" style="padding:.625rem 1.25rem;font-size:.875rem;font-weight:500;text-decoration:none;color:<?= $tab === 'edit' ? 'var(--primary)' : 'var(--text-muted)' ?>;border-bottom:2px solid <?= $tab === 'edit' ? 'var(--primary)' : 'transparent' ?>;margin-bottom:-2px"><?= $editPage ? 'Edit Page' : 'New Page' ?></a>
 </div>
 
 <?php if ($tab === 'list'): ?>
@@ -16,13 +16,13 @@
     </thead>
     <tbody>
       <?php if (empty($pages)): ?>
-        <tr><td colspan="4" style="text-align:center;padding:2rem;color:#94a3b8">No policy pages yet.</td></tr>
+        <tr><td colspan="4" style="text-align:center;padding:2rem;color:var(--text-muted)">No policy pages yet.</td></tr>
       <?php else: ?>
         <?php foreach ($pages as $p): ?>
           <tr>
             <td style="font-weight:500"><?= escape($p['title']) ?></td>
             <td><code>/policies?p=<?= escape($p['slug']) ?></code></td>
-            <td style="font-size:.8125rem;color:#64748b"><?= date('M j, Y', strtotime($p['updated_at'])) ?></td>
+            <td style="font-size:.8125rem;color:var(--text-muted)"><?= date('M j, Y', strtotime($p['updated_at'])) ?></td>
             <td>
               <a href="/admin/policies/edit/<?= $p['id'] ?>" class="btn btn-outline btn-sm">Edit</a>
               <a href="/policies?p=<?= escape($p['slug']) ?>" target="_blank" class="btn btn-outline btn-sm">View</a>

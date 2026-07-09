@@ -3,10 +3,10 @@
     <h1 class="text-2xl font-bold">Shipping</h1>
   </div>
 
-  <div class="flex gap-1 border-b border-gray-200 dark:border-gray-700 mb-6">
-    <a href="?tab=zones" class="px-5 py-3 text-sm font-medium rounded-t-lg transition -mb-px border-b-2 <?= ($tab ?? 'zones') === 'zones' ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400' : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300' ?>">Zones</a>
-    <a href="?tab=rates" class="px-5 py-3 text-sm font-medium rounded-t-lg transition -mb-px border-b-2 <?= $tab === 'rates' ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400' : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300' ?>">Rates</a>
-    <a href="?tab=tracking" class="px-5 py-3 text-sm font-medium rounded-t-lg transition -mb-px border-b-2 <?= $tab === 'tracking' ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400' : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300' ?>">Tracking</a>
+  <div class="flex gap-1 border-b border-color mb-6">
+    <a href="?tab=zones" class="px-5 py-3 text-sm font-medium rounded-t-lg transition -mb-px border-b-2 <?= ($tab ?? 'zones') === 'zones' ? 'border-primary text-primary' : 'border-transparent text-muted hover:text-body' ?>">Zones</a>
+    <a href="?tab=rates" class="px-5 py-3 text-sm font-medium rounded-t-lg transition -mb-px border-b-2 <?= $tab === 'rates' ? 'border-primary text-primary' : 'border-transparent text-muted hover:text-body' ?>">Rates</a>
+    <a href="?tab=tracking" class="px-5 py-3 text-sm font-medium rounded-t-lg transition -mb-px border-b-2 <?= $tab === 'tracking' ? 'border-primary text-primary' : 'border-transparent text-muted hover:text-body' ?>">Tracking</a>
   </div>
 
   <?php if ($tab === 'zones'): ?>
@@ -47,9 +47,9 @@
               <td>
                 <?php $countries = json_decode($z['countries'], true) ?: []; ?>
                 <?php foreach ($countries as $c): ?>
-                  <span class="badge" style="background:#e0e7ff;color:#3730a3"><?= escape($c) ?></span>
+                  <span class="badge" style="background:color-mix(in srgb, var(--primary) 15%, white);color:var(--primary)"><?= escape($c) ?></span>
                 <?php endforeach; ?>
-                <?php if (empty($countries)): ?><span class="text-gray-400 text-sm">All countries</span><?php endif; ?>
+                <?php if (empty($countries)): ?><span class="text-muted text-sm">All countries</span><?php endif; ?>
               </td>
               <td>
                 <button onclick="editZone(<?= $z['id'] ?>, '<?= escape($z['name']) ?>', '<?= escape(implode(', ', json_decode($z['countries'], true) ?: [])) ?>')" class="btn btn-sm btn-outline">Edit</button>
@@ -60,7 +60,7 @@
             </tr>
           <?php endforeach; ?>
           <?php if (empty($zones)): ?>
-            <tr><td colspan="3" class="text-center py-8 text-gray-500">No zones configured. Create one above.</td></tr>
+            <tr><td colspan="3" class="text-center py-8 text-muted">No zones configured. Create one above.</td></tr>
           <?php endif; ?>
         </tbody>
       </table>
@@ -68,10 +68,10 @@
 
     <!-- Edit Zone Modal -->
     <div id="zoneModal" class="fixed inset-0 z-50 hidden bg-black/50 flex items-center justify-center p-4" onclick="if(event.target===this)closeZoneModal()">
-      <div class="bg-white dark:bg-gray-800 rounded-2xl max-w-md w-full p-6 shadow-2xl">
+      <div class="bg-card rounded-2xl max-w-md w-full p-6 shadow-2xl">
         <div class="flex justify-between items-center mb-4">
           <h3 class="text-lg font-bold">Edit Zone</h3>
-          <button onclick="closeZoneModal()" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600">&times;</button>
+          <button onclick="closeZoneModal()" class="w-8 h-8 rounded-full bg-input hover:bg-input">&times;</button>
         </div>
         <form method="POST" id="zoneForm">
           <div class="space-y-4">
@@ -168,7 +168,7 @@
             <tr>
               <td><?= escape($r['zone_name']) ?></td>
               <td class="font-semibold"><?= escape($r['name']) ?></td>
-              <td><span class="badge" style="background:#dbeafe;color:#1e40af"><?= $r['type'] ?></span></td>
+              <td><span class="badge" style="background:color-mix(in srgb, var(--primary) 15%, white);color:var(--primary)"><?= $r['type'] ?></span></td>
               <td><?= $r['type'] === 'percent' ? $r['value'] . '%' : ($r['type'] === 'free' ? '-' : '$' . number_format($r['value'], 2)) ?></td>
               <td><?= $r['min_amount'] > 0 ? '$' . number_format($r['min_amount'], 2) : '-' ?></td>
               <td><?= $r['max_amount'] > 0 ? '$' . number_format($r['max_amount'], 2) : '-' ?></td>
@@ -181,7 +181,7 @@
             </tr>
           <?php endforeach; ?>
           <?php if (empty($rates)): ?>
-            <tr><td colspan="7" class="text-center py-8 text-gray-500">No rates configured. Add zones first.</td></tr>
+            <tr><td colspan="7" class="text-center py-8 text-muted">No rates configured. Add zones first.</td></tr>
           <?php endif; ?>
         </tbody>
       </table>
@@ -189,10 +189,10 @@
 
     <!-- Edit Rate Modal -->
     <div id="rateModal" class="fixed inset-0 z-50 hidden bg-black/50 flex items-center justify-center p-4" onclick="if(event.target===this)closeRateModal()">
-      <div class="bg-white dark:bg-gray-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl">
+      <div class="bg-card rounded-2xl max-w-lg w-full p-6 shadow-2xl">
         <div class="flex justify-between items-center mb-4">
           <h3 class="text-lg font-bold">Edit Rate</h3>
-          <button onclick="closeRateModal()" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600">&times;</button>
+          <button onclick="closeRateModal()" class="w-8 h-8 rounded-full bg-input hover:bg-input">&times;</button>
         </div>
         <form method="POST" id="rateForm">
           <div class="grid grid-cols-2 gap-4">
@@ -269,12 +269,12 @@
             <tr>
               <td class="font-mono font-semibold">#<?= $o['id'] ?></td>
               <td><?= escape($o['customer_name'] ?? '-') ?></td>
-              <td><?= $o['tracking_number'] ? escape($o['tracking_number']) : '<span class="text-gray-400">-</span>' ?></td>
+              <td><?= $o['tracking_number'] ? escape($o['tracking_number']) : '<span class="text-muted">-</span>' ?></td>
               <td>
                 <?php if ($o['tracking_url']): ?>
-                  <a href="<?= escape($o['tracking_url']) ?>" target="_blank" class="text-indigo-600 hover:underline text-sm">Track</a>
+                  <a href="<?= escape($o['tracking_url']) ?>" target="_blank" class="text-primary hover:underline text-sm">Track</a>
                 <?php else: ?>
-                  <span class="text-gray-400">-</span>
+                  <span class="text-muted">-</span>
                 <?php endif; ?>
               </td>
               <td>
@@ -283,7 +283,7 @@
             </tr>
           <?php endforeach; ?>
           <?php if (empty($orders)): ?>
-            <tr><td colspan="5" class="text-center py-8 text-gray-500">No paid/shipped orders found.</td></tr>
+            <tr><td colspan="5" class="text-center py-8 text-muted">No paid/shipped orders found.</td></tr>
           <?php endif; ?>
         </tbody>
       </table>
@@ -291,10 +291,10 @@
 
     <!-- Tracking Modal -->
     <div id="trackModal" class="fixed inset-0 z-50 hidden bg-black/50 flex items-center justify-center p-4" onclick="if(event.target===this)closeTrackModal()">
-      <div class="bg-white dark:bg-gray-800 rounded-2xl max-w-md w-full p-6 shadow-2xl">
+      <div class="bg-card rounded-2xl max-w-md w-full p-6 shadow-2xl">
         <div class="flex justify-between items-center mb-4">
           <h3 class="text-lg font-bold">Set Tracking <span id="trackOrderId">#0</span></h3>
-          <button onclick="closeTrackModal()" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600">&times;</button>
+          <button onclick="closeTrackModal()" class="w-8 h-8 rounded-full bg-input hover:bg-input">&times;</button>
         </div>
         <form method="POST" id="trackForm">
           <div class="space-y-4">

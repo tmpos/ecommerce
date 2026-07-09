@@ -1,6 +1,6 @@
-<div style="display:flex;gap:.5rem;margin-bottom:1.5rem;border-bottom:2px solid #e2e8f0;padding-bottom:0">
-  <a href="/admin/landing" style="padding:.625rem 1.25rem;font-size:.875rem;font-weight:500;text-decoration:none;color:<?= $tab === 'list' ? 'var(--primary)' : '#64748b' ?>;border-bottom:2px solid <?= $tab === 'list' ? 'var(--primary)' : 'transparent' ?>;margin-bottom:-2px">All Landing Pages</a>
-  <a href="/admin/landing/create" style="padding:.625rem 1.25rem;font-size:.875rem;font-weight:500;text-decoration:none;color:<?= $tab === 'edit' ? 'var(--primary)' : '#64748b' ?>;border-bottom:2px solid <?= $tab === 'edit' ? 'var(--primary)' : 'transparent' ?>;margin-bottom:-2px"><?= $editPage ? 'Edit Page' : 'New Page' ?></a>
+<div style="display:flex;gap:.5rem;margin-bottom:1.5rem;border-bottom:2px solid var(--border-color);padding-bottom:0">
+  <a href="/admin/landing" style="padding:.625rem 1.25rem;font-size:.875rem;font-weight:500;text-decoration:none;color:<?= $tab === 'list' ? 'var(--primary)' : 'var(--text-muted)' ?>;border-bottom:2px solid <?= $tab === 'list' ? 'var(--primary)' : 'transparent' ?>;margin-bottom:-2px">All Landing Pages</a>
+  <a href="/admin/landing/create" style="padding:.625rem 1.25rem;font-size:.875rem;font-weight:500;text-decoration:none;color:<?= $tab === 'edit' ? 'var(--primary)' : 'var(--text-muted)' ?>;border-bottom:2px solid <?= $tab === 'edit' ? 'var(--primary)' : 'transparent' ?>;margin-bottom:-2px"><?= $editPage ? 'Edit Page' : 'New Page' ?></a>
 </div>
 
 <?php if ($tab === 'list'): ?>
@@ -17,14 +17,14 @@
     </thead>
     <tbody>
       <?php if (empty($pages)): ?>
-        <tr><td colspan="5" style="text-align:center;padding:2rem;color:#94a3b8">No landing pages yet.</td></tr>
+        <tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--text-muted)">No landing pages yet.</td></tr>
       <?php else: ?>
         <?php foreach ($pages as $p): ?>
           <tr>
             <td style="font-weight:500"><?= escape($p['title']) ?></td>
             <td><code>/landing/<?= escape($p['slug']) ?></code></td>
             <td><span class="badge <?= $p['is_published'] ? 'badge-paid' : 'badge-pending' ?>"><?= $p['is_published'] ? 'Published' : 'Draft' ?></span></td>
-            <td style="font-size:.8125rem;color:#64748b"><?= date('M j, Y', strtotime($p['created_at'])) ?></td>
+            <td style="font-size:.8125rem;color:var(--text-muted)"><?= date('M j, Y', strtotime($p['created_at'])) ?></td>
             <td>
               <a href="/admin/landing/edit/<?= $p['id'] ?>" class="btn btn-outline btn-sm">Edit</a>
               <a href="/landing/<?= escape($p['slug']) ?>" target="_blank" class="btn btn-outline btn-sm">View</a>
@@ -74,18 +74,18 @@
         </div>
       </div>
       <h3 style="font-size:.9375rem;font-weight:600;margin:.75rem 0 .5rem">Sections</h3>
-      <p style="font-size:.8125rem;color:#64748b;margin-bottom:.5rem">Add content sections (title + body):</p>
+      <p style="font-size:.8125rem;color:var(--text-muted);margin-bottom:.5rem">Add content sections (title + body):</p>
       <div id="sectionsWrapper">
         <?php $sections = $editPage['sections'] ?? []; if (empty($sections)) $sections = [['title'=>'', 'content'=>'']]; ?>
         <?php foreach ($sections as $i => $sec): ?>
           <div class="section-row" style="display:flex;gap:.5rem;margin-bottom:.5rem">
             <input type="text" name="section_title[]" class="input" placeholder="Section title" value="<?= escape($sec['title'] ?? '') ?>" style="flex:1">
             <textarea name="section_content[]" class="input" rows="2" placeholder="Section content" style="flex:2"><?= escape($sec['content'] ?? '') ?></textarea>
-            <button type="button" onclick="this.parentElement.remove()" style="background:none;border:none;color:#ef4444;cursor:pointer;font-size:1.25rem">&times;</button>
+            <button type="button" onclick="this.parentElement.remove()" style="background:none;border:none;color:var(--error);cursor:pointer;font-size:1.25rem">&times;</button>
           </div>
         <?php endforeach; ?>
       </div>
-      <button type="button" onclick="addSection()" style="margin-top:.5rem;background:none;border:1px dashed #e2e8f0;border-radius:.5rem;padding:.5rem 1rem;color:var(--primary);cursor:pointer;width:100%;font-size:.875rem">+ Add Section</button>
+      <button type="button" onclick="addSection()" style="margin-top:.5rem;background:none;border:1px dashed var(--border-color);border-radius:.5rem;padding:.5rem 1rem;color:var(--primary);cursor:pointer;width:100%;font-size:.875rem">+ Add Section</button>
       <div style="margin-top:1rem">
         <label>Status</label>
         <select name="is_published" class="input" style="max-width:200px">
@@ -105,7 +105,7 @@ function addSection() {
   const d = document.createElement('div');
   d.className = 'section-row';
   d.style.cssText = 'display:flex;gap:.5rem;margin-bottom:.5rem';
-  d.innerHTML = '<input type="text" name="section_title[]" class="input" placeholder="Section title" style="flex:1"><textarea name="section_content[]" class="input" rows="2" placeholder="Section content" style="flex:2"></textarea><button type="button" onclick="this.parentElement.remove()" style="background:none;border:none;color:#ef4444;cursor:pointer;font-size:1.25rem">&times;</button>';
+  d.innerHTML = '<input type="text" name="section_title[]" class="input" placeholder="Section title" style="flex:1"><textarea name="section_content[]" class="input" rows="2" placeholder="Section content" style="flex:2"></textarea><button type="button" onclick="this.parentElement.remove()" style="background:none;border:none;color:var(--error);cursor:pointer;font-size:1.25rem">&times;</button>';
   w.appendChild(d);
 }
 </script>

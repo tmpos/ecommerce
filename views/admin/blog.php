@@ -1,6 +1,6 @@
-<div style="display:flex;gap:.5rem;margin-bottom:1.5rem;border-bottom:2px solid #e2e8f0;padding-bottom:0">
-  <a href="/admin/blog" style="padding:.625rem 1.25rem;font-size:.875rem;font-weight:500;text-decoration:none;color:<?= $tab === 'list' ? 'var(--primary)' : '#64748b' ?>;border-bottom:2px solid <?= $tab === 'list' ? 'var(--primary)' : 'transparent' ?>;margin-bottom:-2px">All Posts</a>
-  <a href="/admin/blog/create" style="padding:.625rem 1.25rem;font-size:.875rem;font-weight:500;text-decoration:none;color:<?= $tab === 'edit' ? 'var(--primary)' : '#64748b' ?>;border-bottom:2px solid <?= $tab === 'edit' ? 'var(--primary)' : 'transparent' ?>;margin-bottom:-2px"><?= $editPost ? 'Edit Post' : 'New Post' ?></a>
+<div style="display:flex;gap:.5rem;margin-bottom:1.5rem;border-bottom:2px solid var(--border-color);padding-bottom:0">
+  <a href="/admin/blog" style="padding:.625rem 1.25rem;font-size:.875rem;font-weight:500;text-decoration:none;color:<?= $tab === 'list' ? 'var(--primary)' : 'var(--text-muted)' ?>;border-bottom:2px solid <?= $tab === 'list' ? 'var(--primary)' : 'transparent' ?>;margin-bottom:-2px">All Posts</a>
+  <a href="/admin/blog/create" style="padding:.625rem 1.25rem;font-size:.875rem;font-weight:500;text-decoration:none;color:<?= $tab === 'edit' ? 'var(--primary)' : 'var(--text-muted)' ?>;border-bottom:2px solid <?= $tab === 'edit' ? 'var(--primary)' : 'transparent' ?>;margin-bottom:-2px"><?= $editPost ? 'Edit Post' : 'New Post' ?></a>
 </div>
 
 <?php if ($tab === 'list'): ?>
@@ -17,14 +17,14 @@
     </thead>
     <tbody>
       <?php if (empty($posts)): ?>
-        <tr><td colspan="5" style="text-align:center;padding:2rem;color:#94a3b8">No posts yet.</td></tr>
+        <tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--text-muted)">No posts yet.</td></tr>
       <?php else: ?>
         <?php foreach ($posts as $p): ?>
           <tr>
             <td><a href="/blog/<?= escape($p['slug']) ?>" target="_blank" style="color:var(--primary);font-weight:500;text-decoration:none"><?= escape($p['title']) ?></a></td>
             <td><?= escape($p['author']) ?></td>
             <td><span class="badge <?= $p['is_published'] ? 'badge-paid' : 'badge-pending' ?>"><?= $p['is_published'] ? 'Published' : 'Draft' ?></span></td>
-            <td style="font-size:.8125rem;color:#64748b"><?= $p['published_at'] ? date('M j, Y', strtotime($p['published_at'])) : '-' ?></td>
+            <td style="font-size:.8125rem;color:var(--text-muted)"><?= $p['published_at'] ? date('M j, Y', strtotime($p['published_at'])) : '-' ?></td>
             <td>
               <a href="/admin/blog/edit/<?= $p['id'] ?>" class="btn btn-outline btn-sm">Edit</a>
               <form method="POST" action="/admin/blog/delete/<?= $p['id'] ?>" style="display:inline" onsubmit="return confirm('Delete this post?')">

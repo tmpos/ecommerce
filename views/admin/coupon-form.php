@@ -57,7 +57,7 @@
           </div>
         <?php endif; ?>
 
-        <div class="flex gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+        <div class="flex gap-3 pt-4 border-t border-color">
           <button type="submit" class="btn btn-primary"><?= $coupon ? 'Update Coupon' : 'Create Coupon' ?></button>
           <a href="/admin/coupons" class="btn btn-outline">Cancel</a>
         </div>

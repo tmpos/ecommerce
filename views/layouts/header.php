@@ -26,14 +26,42 @@
   </script>
   <style>
     :root {
-      --primary: <?= $SETTINGS['primary_color'] ?? '#4f46e5' ?>;
-      --secondary: <?= $SETTINGS['secondary_color'] ?? '#7c3aed' ?>;
+      --primary: <?= $SETTINGS['primary_color'] ?? '#962312' ?>;
+      --secondary: <?= $SETTINGS['secondary_color'] ?? '#000000' ?>;
       --dark-bg: <?= $SETTINGS['dark_bg_color'] ?? '#101010' ?>;
+      --primary-hover: color-mix(in srgb, var(--primary) 85%, black);
+      --primary-light: color-mix(in srgb, var(--primary) 10%, white);
+      --primary-dark: color-mix(in srgb, var(--primary) 85%, black);
+      --text-on-primary: #fff;
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-input: #ffffff;
+      --bg-header: #ffffff;
+      --text-body: #1e293b;
+      --text-muted: #64748b;
+      --text-heading: #0f172a;
+      --border-color: #e2e8f0;
+      --border-input: #cbd5e1;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --info: #3b82f6;
+    }
+    .dark {
+      --bg-page: var(--dark-bg);
+      --bg-card: #1e293b;
+      --bg-input: #1e293b;
+      --bg-header: #1e293b;
+      --text-body: #e2e8f0;
+      --text-muted: #94a3b8;
+      --text-heading: #f1f5f9;
+      --border-color: #334155;
+      --border-input: #475569;
     }
   </style>
   <link rel="stylesheet" href="/assets/style.css">
 </head>
-<body class="bg-gray-50 dark:bg-[#101010] text-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col" style="background:var(--bg-page);color:var(--text-body)">
 
 <?php $headerStyle = $SETTINGS['header_style'] ?? 'simple'; ?>
 
@@ -41,7 +69,7 @@
 <?php
   $categories = $DB->query('SELECT * FROM categories ORDER BY name')->fetchAll();
 ?>
-<nav class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
+<nav class="bg-card shadow-sm border-b border-color sticky top-0 z-50">
   <!-- Row 1: Logo, Search, Actions -->
   <div class="max-w-7xl mx-auto px-4">
     <div class="flex items-center h-16 gap-4">
@@ -67,9 +95,9 @@
       <div class="hidden sm:flex flex-1 max-w-lg mx-auto">
         <form action="/shop" method="GET" class="w-full">
           <div class="relative">
-            <input type="text" name="search" placeholder="<?= __('search') ?>" value="<?= escape($_GET['search'] ?? '') ?>" class="live-search w-full border border-gray-300 dark:border-gray-600 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-200 text-sm pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
-            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-            <div class="live-search-dropdown hidden absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 max-h-96 overflow-y-auto z-50"></div>
+            <input type="text" name="search" placeholder="<?= __('search') ?>" value="<?= escape($_GET['search'] ?? '') ?>" class="live-search w-full border border-input rounded-full bg-input text-heading text-sm pl-10 pr-4 py-2">
+            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <div class="live-search-dropdown hidden absolute top-full left-0 right-0 mt-2 bg-card rounded-xl shadow-2xl border border-color max-h-96 overflow-y-auto z-50"></div>
           </div>
         </form>
       </div>
@@ -77,32 +105,32 @@
       <!-- Actions -->
       <div class="flex items-center gap-2 shrink-0">
         <!-- Language toggle -->
-        <a href="?lang=<?= $langCode === 'en' ? 'es' : 'en' ?>" class="text-xs font-medium px-2 py-1 rounded border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
+        <a href="?lang=<?= $langCode === 'en' ? 'es' : 'en' ?>" class="text-xs font-medium px-2 py-1 rounded border border-input hover:bg-input">
           <?= $langCode === 'en' ? 'ES' : 'EN' ?>
         </a>
 
         <!-- Dark mode toggle -->
-        <button id="darkToggleExt" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" title="<?= __('dark_mode') ?>">
+        <button id="darkToggleExt" class="p-2 rounded-full hover:bg-input" title="<?= __('dark_mode') ?>">
           <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
           <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
         </button>
 
         <!-- Login / Account button (circular) -->
         <?php if (isLoggedIn()): ?>
-          <a href="/account" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" title="<?= __('nav_account') ?>">
+          <a href="/account" class="p-2 rounded-full hover:bg-input" title="<?= __('nav_account') ?>">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
           </a>
-          <a href="/logout" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" title="<?= __('nav_logout') ?>">
+          <a href="/logout" class="p-2 rounded-full hover:bg-input" title="<?= __('nav_logout') ?>">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
           </a>
         <?php else: ?>
-          <a href="/login" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" title="<?= __('nav_login') ?>">
+          <a href="/login" class="p-2 rounded-full hover:bg-input" title="<?= __('nav_login') ?>">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
           </a>
         <?php endif; ?>
 
         <!-- Cart button (circular) -->
-        <a href="/cart" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 relative" title="<?= __('nav_cart') ?>">
+        <a href="/cart" class="p-2 rounded-full hover:bg-input relative" title="<?= __('nav_cart') ?>">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg>
           <?php $count = getCartCount(); if ($count > 0): ?>
             <span class="cart-badge"><?= $count > 99 ? '99+' : $count ?></span>
@@ -113,34 +141,34 @@
   </div>
 
   <!-- Row 2: Categories -->
-  <div class="border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+  <div class="border-t border-color bg-header">
     <div class="max-w-7xl mx-auto px-4">
       <!-- Desktop categories -->
       <div class="hidden sm:flex items-center gap-1 overflow-x-auto py-2">
-        <a href="/shop" class="px-3 py-1.5 text-sm font-medium rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 whitespace-nowrap <?= !isset($_GET['category']) ? 'bg-primary text-white' : 'text-gray-700 dark:text-gray-300' ?>">
+        <a href="/shop" class="px-3 py-1.5 text-sm font-medium rounded-lg hover:bg-input whitespace-nowrap <?= !isset($_GET['category']) ? 'bg-primary text-white' : 'text-body' ?>">
           <?= __('shop_all') ?>
         </a>
         <?php foreach ($categories as $cat): ?>
-          <a href="/shop?category=<?= escape($cat['slug']) ?>" class="px-3 py-1.5 text-sm font-medium rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 whitespace-nowrap <?= (isset($_GET['category']) && $_GET['category'] === $cat['slug']) ? 'bg-primary text-white' : 'text-gray-700 dark:text-gray-300' ?>">
+          <a href="/shop?category=<?= escape($cat['slug']) ?>" class="px-3 py-1.5 text-sm font-medium rounded-lg hover:bg-input whitespace-nowrap <?= (isset($_GET['category']) && $_GET['category'] === $cat['slug']) ? 'bg-primary text-white' : 'text-body' ?>">
             <?= escape($cat['name']) ?>
           </a>
         <?php endforeach; ?>
         <?php if (isAdmin()): ?>
-          <a href="/admin" class="px-3 py-1.5 text-sm font-medium rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 whitespace-nowrap text-primary"><?= __('nav_admin') ?></a>
+          <a href="/admin" class="px-3 py-1.5 text-sm font-medium rounded-lg hover:bg-input whitespace-nowrap text-primary"><?= __('nav_admin') ?></a>
         <?php endif; ?>
       </div>
     </div>
   </div>
 
   <!-- Mobile menu -->
-  <div id="mobileMenuExt" class="hidden sm:hidden border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+  <div id="mobileMenuExt" class="hidden sm:hidden border-t border-color bg-card">
     <div class="max-w-7xl mx-auto px-4 py-4 space-y-3">
       <!-- Mobile search -->
       <form action="/shop" method="GET">
         <div class="relative">
-          <input type="text" name="search" placeholder="<?= __('search') ?>" value="<?= escape($_GET['search'] ?? '') ?>" class="live-search w-full border border-gray-300 dark:border-gray-600 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-200 text-sm pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
-          <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-          <div class="live-search-dropdown hidden absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 max-h-96 overflow-y-auto z-50"></div>
+          <input type="text" name="search" placeholder="<?= __('search') ?>" value="<?= escape($_GET['search'] ?? '') ?>" class="live-search w-full border border-input rounded-full bg-input text-heading text-sm pl-10 pr-4 py-2">
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <div class="live-search-dropdown hidden absolute top-full left-0 right-0 mt-2 bg-card rounded-xl shadow-2xl border border-color max-h-96 overflow-y-auto z-50"></div>
         </div>
       </form>
 
@@ -161,8 +189,8 @@
       <?php endif; ?>
 
       <!-- Mobile categories -->
-      <div class="pt-2 border-t border-gray-200 dark:border-gray-700">
-        <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2"><?= __('home_categories') ?></p>
+      <div class="pt-2 border-t border-color">
+        <p class="text-xs font-semibold text-muted uppercase tracking-wider mb-2"><?= __('home_categories') ?></p>
         <?php foreach ($categories as $cat): ?>
           <a href="/shop?category=<?= escape($cat['slug']) ?>" class="block py-1 text-sm font-medium"><?= escape($cat['name']) ?></a>
         <?php endforeach; ?>
@@ -173,7 +201,7 @@
 
 <?php else: ?>
   <!-- ═══ SIMPLE HEADER ═══ -->
-  <nav class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
+  <nav class="bg-card shadow-sm border-b border-color sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4">
       <div class="flex justify-between h-16 items-center">
         <a href="/" class="flex items-center gap-2">
@@ -192,9 +220,9 @@
         <div class="hidden sm:flex flex-1 max-w-xs mx-auto">
           <form action="/shop" method="GET" class="w-full">
             <div class="relative">
-              <input type="text" name="search" placeholder="<?= __('search') ?>" value="<?= escape($_GET['search'] ?? '') ?>" class="live-search w-full border border-gray-300 dark:border-gray-600 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-200 text-sm pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
-              <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-              <div class="live-search-dropdown hidden absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 max-h-96 overflow-y-auto z-50"></div>
+              <input type="text" name="search" placeholder="<?= __('search') ?>" value="<?= escape($_GET['search'] ?? '') ?>" class="live-search w-full border border-input rounded-full bg-input text-heading text-sm pl-10 pr-4 py-2">
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              <div class="live-search-dropdown hidden absolute top-full left-0 right-0 mt-2 bg-card rounded-xl shadow-2xl border border-color max-h-96 overflow-y-auto z-50"></div>
             </div>
           </form>
         </div>
@@ -224,12 +252,12 @@
             <?php endif; ?>
           </a>
 
-          <button id="darkToggle" class="p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700" title="<?= __('dark_mode') ?>">
+          <button id="darkToggle" class="p-1 rounded hover:bg-input" title="<?= __('dark_mode') ?>">
             <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
             <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
           </button>
 
-          <a href="?lang=<?= $langCode === 'en' ? 'es' : 'en' ?>" class="text-xs font-medium px-2 py-1 rounded border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <a href="?lang=<?= $langCode === 'en' ? 'es' : 'en' ?>" class="text-xs font-medium px-2 py-1 rounded border border-input hover:bg-input">
             <?= $langCode === 'en' ? 'ES' : 'EN' ?>
           </a>
 
@@ -297,7 +325,7 @@
           .then(function(r) { return r.json(); })
           .then(function(results) {
             if (!results.length) {
-              dropdown.innerHTML = '<div class="px-4 py-6 text-center text-sm text-gray-400"><?= __('search_no_results') ?></div>';
+              dropdown.innerHTML = '<div class="px-4 py-6 text-center text-sm text-muted"><?= __('search_no_results') ?></div>';
               dropdown.classList.remove('hidden');
               return;
             }
@@ -305,13 +333,13 @@
             results.forEach(function(p) {
               var img = p.image
                 ? '<img src="/' + p.image + '" class="w-12 h-12 rounded-lg object-cover flex-shrink-0">'
-                : '<div class="w-12 h-12 rounded-lg bg-gray-100 dark:bg-gray-700 flex items-center justify-center flex-shrink-0"><svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>';
-              html += '<a href="/product/' + p.slug + '" class="flex items-center gap-3 px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 transition border-b border-gray-100 dark:border-gray-700 last:border-0">' +
+                : '<div class="w-12 h-12 rounded-lg bg-input flex items-center justify-center flex-shrink-0"><svg class="w-5 h-5 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>';
+              html += '<a href="/product/' + p.slug + '" class="flex items-center gap-3 px-3 py-2 hover:bg-input transition border-b border-color last:border-0">' +
                 img +
                 '<div class="min-w-0 flex-1"><p class="text-sm font-medium truncate">' + p.name + '</p>' +
                 '<p class="text-sm font-bold" style="color:var(--primary)">' + p.currency + Number(p.price).toFixed(2) + '</p></div></a>';
             });
-            html += '<a href="/shop?search=' + encodeURIComponent(q) + '" class="block px-3 py-2 text-sm text-center font-medium hover:bg-gray-100 dark:hover:bg-gray-700" style="color:var(--primary)"><?= __('search_view_all') ?></a>';
+            html += '<a href="/shop?search=' + encodeURIComponent(q) + '" class="block px-3 py-2 text-sm text-center font-medium hover:bg-input" style="color:var(--primary)"><?= __('search_view_all') ?></a>';
             dropdown.innerHTML = html;
             dropdown.classList.remove('hidden');
           })
