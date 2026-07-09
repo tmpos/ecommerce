@@ -34,7 +34,7 @@
     }
     .dark body,
     body.dark {
-      background: #0f172a;
+      background: #101010;
     }
     .sidebar {
       position: fixed;

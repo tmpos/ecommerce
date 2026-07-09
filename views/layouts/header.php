@@ -32,7 +32,7 @@
   </style>
   <link rel="stylesheet" href="/assets/style.css">
 </head>
-<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
+<body class="bg-gray-50 dark:bg-[#101010] text-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
 
 <?php $headerStyle = $SETTINGS['header_style'] ?? 'simple'; ?>
 
