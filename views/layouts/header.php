@@ -49,9 +49,9 @@
     }
     .dark {
       --bg-page: var(--dark-bg);
-      --bg-card: #1e293b;
-      --bg-input: #1e293b;
-      --bg-header: #1e293b;
+      --bg-card: var(--dark-bg);
+      --bg-input: var(--dark-bg);
+      --bg-header: var(--dark-bg);
       --text-body: #e2e8f0;
       --text-muted: #94a3b8;
       --text-heading: #f1f5f9;
