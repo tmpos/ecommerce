@@ -23,6 +23,7 @@
     :root {
       --primary: <?= $SETTINGS['primary_color'] ?? '#4f46e5' ?>;
       --secondary: <?= $SETTINGS['secondary_color'] ?? '#7c3aed' ?>;
+      --dark-bg: <?= $SETTINGS['dark_bg_color'] ?? '#101010' ?>;
       --sidebar-w: 260px;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,7 +35,7 @@
     }
     .dark body,
     body.dark {
-      background: #101010;
+      background: var(--dark-bg, #101010);
     }
     .sidebar {
       position: fixed;

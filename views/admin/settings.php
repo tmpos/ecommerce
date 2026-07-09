@@ -110,6 +110,14 @@
             <input type="text" value="<?= escape($settings['secondary_color']) ?>" class="flex-1 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200" readonly onclick="this.previousElementSibling.click()">
           </div>
         </div>
+        <div>
+          <label class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Dark Mode Background</label>
+          <div class="flex gap-2">
+            <input type="color" name="dark_bg_color" value="<?= escape($settings['dark_bg_color'] ?? '#101010') ?>" class="h-10 w-10 rounded cursor-pointer">
+            <input type="text" value="<?= escape($settings['dark_bg_color'] ?? '#101010') ?>" class="flex-1 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200" readonly onclick="this.previousElementSibling.click()">
+          </div>
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Used as the page background in dark mode.</p>
+        </div>
       </div>
     </fieldset>
 

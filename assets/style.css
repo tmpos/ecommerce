@@ -9,16 +9,16 @@
 .dark .bg-gray-200,
 .dark .bg-gray-800,
 .dark .bg-gray-900 {
-  background-color: #101010;
+  background-color: var(--dark-bg, #101010);
 }
 
 .dark .img-placeholder {
-  background: linear-gradient(135deg, #1a1a1a, #252525) !important;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--dark-bg, #101010) 80%, white), var(--dark-bg, #101010)) !important;
   color: #6b7280;
 }
 
 .dark .skeleton {
-  background: linear-gradient(90deg, #1a1a1a 25%, #252525 50%, #1a1a1a 75%) !important;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--dark-bg, #101010) 80%, white) 25%, var(--dark-bg, #101010) 50%, color-mix(in srgb, var(--dark-bg, #101010) 80%, white) 75%) !important;
   background-size: 200% 100%;
 }
 

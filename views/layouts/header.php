@@ -28,6 +28,7 @@
     :root {
       --primary: <?= $SETTINGS['primary_color'] ?? '#4f46e5' ?>;
       --secondary: <?= $SETTINGS['secondary_color'] ?? '#7c3aed' ?>;
+      --dark-bg: <?= $SETTINGS['dark_bg_color'] ?? '#101010' ?>;
     }
   </style>
   <link rel="stylesheet" href="/assets/style.css">
