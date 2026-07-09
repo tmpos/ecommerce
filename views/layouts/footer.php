@@ -20,7 +20,7 @@
   ?>
 
   <footer class="mt-12 bg-[#101010] text-gray-200">
-    <section id="newsletter" class="bg-[#970d05]">
+    <section id="newsletter" class="" style="background:var(--primary)">
       <div class="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div>
           <h3 class="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
@@ -33,7 +33,7 @@
           </div>
         </div>
         <form method="POST" action="/newsletter" class="flex flex-col sm:flex-row gap-3 md:justify-end">
-          <input type="email" name="email" required placeholder="Correo" class="w-full sm:max-w-sm rounded-md border border-black/20 bg-[#1b1b1b] px-5 py-4 text-sm text-white placeholder:text-gray-500 outline-none focus:ring-2 focus:ring-white/40">
+          <input type="email" name="email" required placeholder="Correo" class="w-full sm:max-w-sm rounded-md border border-black/20 px-5 py-4 text-sm text-white placeholder:text-gray-500 outline-none focus:ring-2 focus:ring-white/40" style="background:var(--dark-bg)">
           <button type="submit" class="rounded-md bg-[#151515] px-8 py-4 text-sm font-bold text-white hover:bg-black transition">APLICAR</button>
         </form>
       </div>

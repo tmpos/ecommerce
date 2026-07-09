@@ -154,7 +154,7 @@
         <?php if (isAdmin()): ?>
           <a href="/admin" class="block py-1 text-sm font-medium text-primary"><?= __('nav_admin') ?></a>
         <?php endif; ?>
-        <a href="/logout" class="block py-1 text-sm font-medium text-red-500"><?= __('nav_logout') ?></a>
+        <a href="/logout" class="block py-1 text-sm font-medium" style="color:var(--primary)"><?= __('nav_logout') ?></a>
       <?php else: ?>
         <a href="/login" class="block py-1 text-sm font-medium"><?= __('nav_login') ?></a>
         <a href="/register" class="block py-1 text-sm font-medium"><?= __('nav_register') ?></a>
@@ -211,7 +211,7 @@
             <?php if (isAdmin()): ?>
               <a href="/admin" class="text-sm font-medium text-primary hover:(opacity-80) hidden sm:inline"><?= __('nav_admin') ?></a>
             <?php endif; ?>
-            <a href="/logout" class="text-sm font-medium text-red-500 hover:(opacity-80) hidden sm:inline"><?= __('nav_logout') ?></a>
+            <a href="/logout" class="text-sm font-medium hidden sm:inline" style="color:var(--primary)"><?= __('nav_logout') ?></a>
           <?php else: ?>
             <a href="/login" class="text-sm font-medium hover:(opacity-80) hidden sm:inline"><?= __('nav_login') ?></a>
             <a href="/register" class="text-sm font-medium hover:(opacity-80) hidden sm:inline"><?= __('nav_register') ?></a>
@@ -253,7 +253,7 @@
             <?php if (isAdmin()): ?>
               <a href="/admin" class="py-1 text-primary font-bold"><?= __('nav_admin') ?></a>
             <?php endif; ?>
-            <a href="/logout" class="py-1 text-red-500"><?= __('nav_logout') ?></a>
+            <a href="/logout" class="py-1" style="color:var(--primary)"><?= __('nav_logout') ?></a>
           <?php else: ?>
             <a href="/login" class="py-1"><?= __('nav_login') ?></a>
             <a href="/register" class="py-1"><?= __('nav_register') ?></a>

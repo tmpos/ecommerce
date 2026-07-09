@@ -165,7 +165,7 @@
                 </div>
               <?php endif; ?>
               <?php if ($item['sale_price']): ?>
-                <span class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded"><?= __('product_sale') ?></span>
+                <span class="absolute top-2 left-2 text-white text-xs font-bold px-2 py-0.5 rounded" style="background:var(--primary)"><?= __('product_sale') ?></span>
               <?php endif; ?>
             </a>
             <div class="p-4">

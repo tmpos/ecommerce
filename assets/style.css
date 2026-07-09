@@ -1,4 +1,18 @@
 :root {
+  --primary-hover: color-mix(in srgb, var(--primary) 85%, black);
+  --primary-light: color-mix(in srgb, var(--primary) 10%, white);
+  --primary-dark: color-mix(in srgb, var(--primary) 85%, black);
+  --text-on-primary: #fff;
+  --border-color: #e2e8f0;
+  --border-color-dark: #334155;
+  --bg-card: #fff;
+  --bg-card-dark: #1e293b;
+  --text-muted: #64748b;
+  --text-muted-dark: #94a3b8;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --info: #3b82f6;
 }
 
 .dark body,
@@ -22,37 +36,67 @@
   background-size: 200% 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+}
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Global transitions for interactive elements */
+a, button, input, select, textarea, .transition-colors {
+  transition: all 0.2s ease;
+}
+
+/* Image hover zoom */
+.img-zoom {
+  overflow: hidden;
+}
+.img-zoom img {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.img-zoom:hover img {
+  transform: scale(1.05);
 }
 
 .btn-primary {
   background-color: var(--primary);
-  color: white;
+  color: var(--text-on-primary);
   padding: 0.5rem 1.5rem;
   border-radius: 0.5rem;
   font-weight: 600;
-  transition: opacity 0.2s, transform 0.1s;
+  transition: all 0.2s ease;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  border: none;
+  cursor: pointer;
 }
 .btn-primary:hover {
-  opacity: 0.9;
+  background-color: var(--primary-hover);
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 30%, transparent);
+}
+.btn-primary:active {
+  transform: translateY(0);
 }
 
 .btn-secondary {
   background-color: var(--secondary);
-  color: white;
+  color: var(--text-on-primary);
   padding: 0.5rem 1.5rem;
   border-radius: 0.5rem;
   font-weight: 600;
-  transition: opacity 0.2s, transform 0.1s;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
 }
 .btn-secondary:hover {
   opacity: 0.9;
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--secondary) 30%, transparent);
 }
 
 /* Hero section */
@@ -62,11 +106,14 @@ body {
 
 /* Product card */
 .product-card {
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .product-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+}
+.dark .product-card:hover {
+  box-shadow: 0 12px 24px rgba(0,0,0,0.3);
 }
 
 /* Image placeholder */
@@ -84,7 +131,7 @@ body {
   position: absolute;
   top: -6px;
   right: -8px;
-  background: #ef4444;
+  background: var(--primary);
   color: white;
   font-size: 0.65rem;
   font-weight: 700;
@@ -99,6 +146,7 @@ body {
 /* Flash message */
 .flash {
   animation: flashIn 0.3s ease-out;
+  border-radius: 0.5rem;
 }
 @keyframes flashIn {
   from { opacity: 0; transform: translateY(-10px); }
@@ -115,6 +163,7 @@ body {
 input:focus, select:focus, textarea:focus {
   outline: none;
   ring: 2px solid var(--primary);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 /* Skeleton loading */
@@ -122,8 +171,49 @@ input:focus, select:focus, textarea:focus {
   background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
   background-size: 200% 100%;
   animation: skeleton 1.5s infinite;
+  border-radius: 0.25rem;
 }
 @keyframes skeleton {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Focus ring utility */
+.focus-ring:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Card elevation */
+.card-elevated {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-elevated:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+.dark .card-elevated:hover {
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }

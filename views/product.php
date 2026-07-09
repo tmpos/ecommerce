@@ -31,7 +31,7 @@
           </div>
         <?php endif; ?>
         <?php if ($product['sale_price']): ?>
-          <span class="absolute top-4 left-4 bg-red-500 text-white font-bold px-3 py-1 rounded-lg text-sm z-10"><?= __('product_sale') ?></span>
+          <span class="absolute top-4 left-4 text-white font-bold px-3 py-1 rounded-lg text-sm z-10" style="background:var(--primary)"><?= __('product_sale') ?></span>
         <?php endif; ?>
       </div>
     </div>
