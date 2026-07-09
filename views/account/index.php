@@ -170,7 +170,7 @@
             </a>
             <div class="p-4">
               <a href="/product/<?= escape($item['slug']) ?>">
-                <p class="font-semibold text-sm mb-1 hover:text-indigo-500 transition"><?= escape($item['name']) ?></p>
+                <p class="font-semibold text-sm mb-1 transition hover:opacity-80" style="color:var(--primary)"><?= escape($item['name']) ?></p>
               </a>
               <div class="flex items-center justify-between mb-3">
                 <?php if ($item['sale_price']): ?>
